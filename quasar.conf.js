@@ -11,7 +11,7 @@ module.exports = function (ctx) {
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons' // optional, you are not bound to it
+      'material-icons', // optional, you are not bound to it
       // 'ionicons',
       // 'mdi',
       // 'fontawesome'
@@ -50,6 +50,7 @@ module.exports = function (ctx) {
         'QToolbarTitle',
         'QBtn',
         'QIcon',
+        'QChip',
         'QList',
         'QListHeader',
         'QItem',
