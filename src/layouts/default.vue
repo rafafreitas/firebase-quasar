@@ -22,8 +22,36 @@
         <q-btn flat round dense icon="dashboard" />
         <q-btn flat round dense icon="notifications_active">
           <q-chip v-if="true" floating color="red">1</q-chip>
+          <q-popover>
+          <q-list link class="no-border">
+            <q-item v-close-overlay>
+              <q-item-main label="Novas notificações 1" />
+            </q-item>
+
+            <q-item v-close-overlay>
+              <q-item-main label="Novas notificações 2" />
+            </q-item>
+            <q-item v-close-overlay>
+              <q-item-main label="Novas notificações 3" />
+            </q-item>
+          </q-list>
+          </q-popover>
         </q-btn>
-        <q-btn flat round dense icon="more_vert" />
+        <q-btn round flat icon="more_vert">
+          <q-popover>
+            <q-list link class="no-border">
+              <q-item v-close-overlay>
+                <q-item-main label="Listagem" />
+              </q-item>
+              <q-item v-close-overlay>
+                <q-item-main label="Configurações" />
+              </q-item>
+              <q-item v-close-overlay>
+                <q-item-main label="Sair" />
+              </q-item>
+            </q-list>
+          </q-popover>
+        </q-btn>
       </q-toolbar>
     </q-layout-header>
 
@@ -62,26 +90,8 @@
 
           </div>
         </q-list-header>
-        <q-item @click.native="openURL('http://quasar-framework.org')">
-          <q-item-side icon="school" />
-          <q-item-main label="Docs" sublabel="quasar-framework.org" />
-        </q-item>
-        <q-item @click.native="openURL('https://github.com/quasarframework/')">
-          <q-item-side icon="code" />
-          <q-item-main label="GitHub" sublabel="github.com/quasarframework" />
-        </q-item>
-        <q-item @click.native="openURL('https://discord.gg/5TDhbDg')">
-          <q-item-side icon="chat" />
-          <q-item-main label="Discord Chat Channel" sublabel="https://discord.gg/5TDhbDg" />
-        </q-item>
-        <q-item @click.native="openURL('http://forum.quasar-framework.org')">
-          <q-item-side icon="record_voice_over" />
-          <q-item-main label="Forum" sublabel="forum.quasar-framework.org" />
-        </q-item>
-        <q-item @click.native="openURL('https://twitter.com/quasarframework')">
-          <q-item-side icon="rss feed" />
-          <q-item-main label="Twitter" sublabel="@quasarframework" />
-        </q-item>
+        <menuList/>
+
       </q-list>
     </q-layout-drawer>
 
@@ -93,6 +103,7 @@
 
 <script>
 import { openURL } from 'quasar'
+import menuList from './menuList'
 
 export default {
   name: 'LayoutDefault',
@@ -103,6 +114,9 @@ export default {
   },
   methods: {
     openURL
+  },
+  components:{
+    menuList
   }
 }
 </script>
@@ -135,5 +149,27 @@ export default {
         }
       }
     }
+  }
+  /* Let's get this party started */
+  .q-layout-drawer::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  .q-layout-drawer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  .q-layout-drawer::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(28, 127, 107, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  }
+  .q-layout-drawer::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.4);
   }
 </style>
