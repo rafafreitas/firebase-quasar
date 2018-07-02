@@ -103,8 +103,14 @@
     margin-bottom: 0px;
     div.card-content {
       min-height: 160px;
+      .q-if:hover:before{
+        color: #fff!important;
+      }
       div.input-login {
-        color: #ffffff !important;
+        color: #ffc107 !important;
+        .q-if-label{
+          color: #ffffff;
+        }
         input {
           color: #ffffff !important;
         }
@@ -120,9 +126,6 @@
       width: 300px;
       background: #ffc107e3!important;
     }
-  }
-  button {
-    margin-bottom: 4%;
   }
   h4 {
     font-weight: 300;

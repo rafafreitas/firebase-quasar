@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center back-color-default">
     <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
   </q-page>
 </template>
@@ -12,3 +12,8 @@ export default {
   name: 'PageIndex'
 }
 </script>
+<style>
+  .back-color-default{
+    background-color: #443f3f;
+  }
+</style>

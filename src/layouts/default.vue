@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header>
       <q-toolbar
-        color="cyan-9"
+        color="dark"
         :inverted="$q.theme === 'ios'"
       >
         <q-btn
@@ -81,11 +81,11 @@
           <div class="header-data-actions row">
             <div class="col-5"></div>
             <div class="col-7 data-user-actions">
-              <q-btn style="background: #7B1FA2" icon="lock_outline" class="data-actions-btn" />
-              <q-btn style="background: #7B1FA2" icon="person_outline" class="data-actions-btn">
+              <q-btn style="background: #591575" icon="lock_outline" class="data-actions-btn" />
+              <q-btn style="background: #591575" icon="person_outline" class="data-actions-btn">
                 <q-chip v-if="true" floating color="red">!</q-chip>
               </q-btn>
-              <q-btn style="background: #7B1FA2" icon="exit_to_app" class="data-actions-btn"/>
+              <q-btn style="background: #591575" icon="exit_to_app" class="data-actions-btn"/>
             </div>
 
           </div>
@@ -124,9 +124,10 @@ export default {
 <style lang="scss">
   .data-menu-top{
     padding-top: 0px;
+    padding-bottom: 0px;
 
     .data-menu-header{
-      background-color: #1c7f6b;
+      background-color: #303030;
       height: 150px;
       color: #fff;
 
@@ -166,7 +167,8 @@ export default {
   .q-layout-drawer::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgba(28, 127, 107, 0.8);
+    background: rgb(123, 31, 162);
+    /*(42, 45, 53)*/
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
   }
   .q-layout-drawer::-webkit-scrollbar-thumb:window-inactive {
