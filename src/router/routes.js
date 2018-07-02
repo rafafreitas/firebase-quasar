@@ -1,10 +1,43 @@
+import Login from '../pages/login'
+import Index from '../pages/index'
+import Default from '../layouts/default'
 
 export default [
   {
     path: '/',
-    component: () => import('layouts/default'),
+    redirect: {
+      name: 'Login'
+    }
+  },
+  {
+    path: '/home',
+    redirect: {
+      name: 'Dashboard'
+    }
+  },
+  {
+    name: 'Login',
+    path: '/login',
+    component: Login,
+    meta: {
+      auth: false,
+      userType: null
+    }
+  },
+  {
+    name: 'Home',
+    path: '/',
+    component: Default,
     children: [
-      { path: '', component: () => import('pages/index') }
+      {
+        name: 'Dashboard',
+        path: 'dashboard',
+        component: Index,
+        meta: {
+          auth: true,
+          userType: null
+        }
+      }
     ]
   },
 
