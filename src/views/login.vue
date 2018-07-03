@@ -31,7 +31,7 @@
 <script type="text/javascript">
   /* eslint-disable */
   import Vivus from 'vivus'
-  import logoData from './logoData'
+  import logoData from '../components/logoData'
   import { Platform } from 'quasar'
   export default {
     mounted () {
