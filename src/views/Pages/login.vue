@@ -31,7 +31,7 @@
 <script type="text/javascript">
   /* eslint-disable */
   import Vivus from 'vivus'
-  import logoData from '../components/logoData'
+  import logoData from '../../components/logoData'
   import { Platform } from 'quasar'
   export default {
     mounted () {
@@ -88,7 +88,7 @@
   }
   div.background-login{
     z-index: 0;
-    background-image: url("../statics/background.jpg");
+    background-image: url("../../statics/background.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

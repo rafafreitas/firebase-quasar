@@ -1,8 +1,8 @@
-import Login from '../views/login'
-import Index from '../views/index'
+import Login from '../views/Pages/login'
+import Dashboard from '../views/Dashboard/dashboard'
 import Default from '../layouts/default'
-import page404 from '../views/pages/404'
-import page403 from '../views/pages/forbidden'
+import page404 from '../views/Pages/404'
+import page403 from '../views/Pages/forbidden'
 
 export default [
   {
@@ -34,7 +34,7 @@ export default [
       {
         name: 'Dashboard',
         path: 'dashboard',
-        component: Index,
+        component: Dashboard,
         meta: {
           auth: true,
           userType: null
