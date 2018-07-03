@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '../store'
 import routes from './routes'
 
 Vue.use(VueRouter)
@@ -19,6 +19,18 @@ const Router = new VueRouter({
   base: process.env.VUE_ROUTER_BASE,
   scrollBehavior: () => ({ y: 0 }),
   routes
+})
+
+
+Router.beforeEach((to, from, next) => {
+  console.log('Check Routers')
+  if (to.meta.auth && !store.state.app.auth) {
+    console.log('Unauthorized route')
+    next({path: '/login'})
+  }else{
+    console.log('Authorized route')
+    next()
+  }
 })
 
 export default Router

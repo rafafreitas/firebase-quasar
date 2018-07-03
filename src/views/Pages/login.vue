@@ -60,7 +60,7 @@
     },
     methods: {
       login () {
-        this.$router.push('/')
+        this.$router.push('/dashboard')
       },
       startAnimation () {
         this.vivus = new Vivus('logo', {

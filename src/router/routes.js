@@ -37,7 +37,7 @@ export default [
         component: Dashboard,
         meta: {
           auth: true,
-          userType: null
+          userType: 1
         }
       },
       {
