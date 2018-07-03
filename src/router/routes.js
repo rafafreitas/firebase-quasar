@@ -1,6 +1,8 @@
-import Login from '../pages/login'
-import Index from '../pages/index'
+import Login from '../views/login'
+import Index from '../views/index'
 import Default from '../layouts/default'
+import page404 from '../views/pages/404'
+import page403 from '../views/pages/forbidden'
 
 export default [
   {
@@ -37,12 +39,21 @@ export default [
           auth: true,
           userType: null
         }
+      },
+      {
+        name: 'Forbidden',
+        path: 'forbidden',
+        component: page403,
+        meta: {
+          auth: true,
+          userType: null
+        }
       }
     ]
   },
 
   { // Always leave this as last one
     path: '*',
-    component: () => import('pages/404')
+    component: page404
   }
 ]
