@@ -1,5 +1,3 @@
-// Configuration for your app
-
 module.exports = function (ctx) {
   return {
     // app plugins (/src/plugins)
@@ -18,6 +16,10 @@ module.exports = function (ctx) {
     ],
     supportIE: false,
     build: {
+      // Variáveis de ambiente
+      env: {
+        configFranck : 123
+      },
       scopeHoisting: true,
       vueRouterMode: 'history',
       // vueCompiler: true,

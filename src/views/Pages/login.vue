@@ -31,6 +31,7 @@
 <script type="text/javascript">
   /* eslint-disable */
   import Vivus from 'vivus'
+  import Firebase from '../../plugins/firebase'
   import logoData from '../../components/logoData'
   import { Platform } from 'quasar'
   export default {
@@ -60,9 +61,18 @@
     },
     methods: {
       login () {
+        Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+          function (user) {
+            console.log(user)
+          },
+          function (err) {
+            console.log(err)
+          }
+        )
         this.$router.push('/dashboard')
       },
       startAnimation () {
+        console.log(process.env.configFranck)
         this.vivus = new Vivus('logo', {
             duration: 200,
             forceRender: false
