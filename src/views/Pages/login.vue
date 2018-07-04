@@ -51,28 +51,25 @@
     },
     data () {
       return {
-        logos: Object.keys(logoData),
         logo: 'Keytronic',
         email: '',
         password: '',
-        toneColor: 10,
         vivus: ''
       }
     },
     methods: {
       login () {
         Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          function (user) {
+          (user) => {
             console.log(user)
+            this.$router.push('/home')
           },
-          function (err) {
+          (err) => {
             console.log(err)
           }
         )
-        this.$router.push('/dashboard')
       },
       startAnimation () {
-        console.log(process.env.configFranck)
         this.vivus = new Vivus('logo', {
             duration: 200,
             forceRender: false

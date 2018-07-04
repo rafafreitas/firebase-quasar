@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 import routes from './routes'
+import Firebase from '../plugins/firebase'
 
 Vue.use(VueRouter)
 
@@ -24,13 +25,24 @@ const Router = new VueRouter({
 
 Router.beforeEach((to, from, next) => {
   console.log('Check Routers')
-  if (to.meta.auth && !store.state.app.auth) {
-    console.log('Unauthorized route')
-    next({path: '/login'})
-  }else{
-    console.log('Authorized route')
-    next()
-  }
+  let requiresAuth = to.meta.auth
+  // let currentUser = Firebase.auth().currentUser;
+
+  Firebase.auth().onAuthStateChanged(function(user) {
+    if (requiresAuth && user) {
+      console.log('Authorized route')
+      next()
+
+    } else if (requiresAuth && !user) {
+      console.log('Unauthorized route')
+      next({path: '/login'})
+
+    }else {
+      console.log('Authorized route')
+      next()
+    }
+  });
+
 })
 
 export default Router

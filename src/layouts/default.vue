@@ -47,7 +47,7 @@
                 <q-item-main label="Configurações" />
               </q-item>
               <q-item v-close-overlay>
-                <q-item-main label="Sair" />
+                <q-item-main label="Sair" @click.native="logout()" />
               </q-item>
             </q-list>
           </q-popover>
@@ -85,7 +85,7 @@
               <q-btn style="background: #591575" icon="person_outline" class="data-actions-btn">
                 <q-chip v-if="true" floating color="red">!</q-chip>
               </q-btn>
-              <q-btn style="background: #591575" icon="exit_to_app" class="data-actions-btn"/>
+              <q-btn style="background: #591575" icon="exit_to_app" class="data-actions-btn" @click="logout()"/>
             </div>
 
           </div>
@@ -104,6 +104,7 @@
 <script>
 import { openURL } from 'quasar'
 import menuList from './menuList'
+import  Firebase from '../plugins/firebase'
 
 export default {
   name: 'LayoutDefault',
@@ -113,7 +114,13 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    logout () {
+      console.log('Testeassa')
+      Firebase.auth().signOut().then(() =>{
+        this.$router.push('/login')
+      })
+    },
   },
   components:{
     menuList
