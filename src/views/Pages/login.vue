@@ -23,6 +23,12 @@
         <div class="card-actions inline-block vertical-middle">
           <q-btn color="amber" @click="login()" label="Login" />
         </div>
+        <br>
+        <br>
+        <div class="card-actions inline-block vertical-middle">
+          <q-btn color="amber" @click="create()" label="Cadastrar" />
+        </div>
+
       </div>
     </div>
   </div>
@@ -37,6 +43,19 @@
   export default {
     mounted () {
       this.startAnimation()
+      Firebase.auth().onAuthStateChanged(
+        (user) => {
+        if (user) {
+          console.log('User is online!')
+          if (!user.emailVerified){
+            console.log("E-mail not verified!")
+          }else{
+            this.$router.push('/home')
+          }
+        }else {
+          console.log('User is offline!')
+        }
+      });
     },
     computed: {
       heightSize (){
@@ -60,9 +79,39 @@
     methods: {
       login () {
         Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          (user) => {
-            console.log(user)
-            this.$router.push('/home')
+          (resp) => {
+            if (!resp.user.emailVerified){
+              console.log(resp)
+              console.log("E-mail not verified!")
+            }else{
+              this.$router.push('/home')
+            }
+          },
+          (err) => {
+            console.log(err)
+          }
+        )
+      },
+      create () {
+        Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+          (resp) => {
+            console.log(resp)
+            resp.user.sendEmailVerification().then(function() {
+              console.log('Verifique seu email.')
+            }).catch(function(error) {
+              // An error happened.
+            });
+
+            resp.user.updateProfile({
+              displayName: "Jane Q. User",
+              newCampo: "Jane Q. User",
+              photoURL: "https://example.com/jane-q-user/profile.jpg"
+            }).then(function() {
+              console.log('User alterado')
+            }).catch(function(error) {
+              // An error happened.
+            });
+
           },
           (err) => {
             console.log(err)
