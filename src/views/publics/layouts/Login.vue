@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="card-actions inline-block vertical-middle">
-          <q-btn color="amber" @click="login()" label="Login" />
+          <q-btn color="amber" @click="Login()" label="Login" />
         </div>
         <br>
         <br>
@@ -37,8 +37,8 @@
 <script type="text/javascript">
   /* eslint-disable */
   import Vivus from 'vivus'
-  import Firebase from '../../plugins/firebase'
-  import logoData from '../../components/logoData'
+  import Firebase from '../../../plugins/firebase'
+  import logoData from '../../../components/logoData'
   import { Platform } from 'quasar'
   export default {
     mounted () {
@@ -77,12 +77,13 @@
       }
     },
     methods: {
-      login () {
+      Login () {
         Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (resp) => {
             if (!resp.user.emailVerified){
               console.log(resp)
               console.log("E-mail not verified!")
+              this.$router.push('/home')
             }else{
               this.$router.push('/home')
             }
@@ -144,7 +145,7 @@
   }
   div.background-login{
     z-index: 0;
-    background-image: url("../../statics/background.jpg");
+    background-image: url("../../../statics/background.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

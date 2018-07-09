@@ -69,7 +69,7 @@
         <q-list-header class="data-menu-header">
           <div class="header-data-user row">
             <div class="col-5">
-              <img class="data-user-img" src="../statics/user.png" />
+              <img class="data-user-img" src="../../../statics/user.png" />
             </div>
             <div class="col-7">
               <div class="div-data-user-name">
@@ -103,8 +103,8 @@
 
 <script>
 import { openURL } from 'quasar'
-import menuList from './menuList'
-import  Firebase from '../plugins/firebase'
+import menuList from './MenuList'
+import  Firebase from '../../../plugins/firebase'
 
 export default {
   name: 'LayoutDefault',
