@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store'
 import routes from './routes'
-import Firebase from '../plugins/firebase'
+import Firebase from '../helpers/firebase'
 
 Vue.use(VueRouter)
 

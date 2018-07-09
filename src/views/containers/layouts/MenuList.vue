@@ -20,9 +20,9 @@
       <q-item-side class="menu-itens-icon" icon="fas fa-user-tie" />
       <q-item-main class="menu-itens-name" label="Gerenciar Clientes" sublabel="Cadastrar/Editar" />
     </q-item>
-    <q-item to="/campanhas">
+    <q-item to="/grupos">
       <q-item-side class="menu-itens-icon" icon="far fa-images" />
-      <q-item-main class="menu-itens-name" label="Manter Campanhas" sublabel="Cadastrar/Editar" />
+      <q-item-main class="menu-itens-name" label="Manter Grupos" sublabel="Cadastrar/Editar" />
     </q-item>
 
     <q-item>
@@ -31,10 +31,6 @@
     <q-item to="/parceiros">
       <q-item-side class="menu-itens-icon" icon="fas fa-paint-brush" />
       <q-item-main class="menu-itens-name" label="Equipadoras" sublabel="Estabelecimentos Parceiros" />
-    </q-item>
-    <q-item to="/drivers">
-      <q-item-side class="menu-itens-icon" icon="fab fa-uber" />
-      <q-item-main class="menu-itens-name" label="Motoristas" sublabel="Acompanhar informações" />
     </q-item>
 
     <q-item>

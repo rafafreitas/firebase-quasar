@@ -56,6 +56,7 @@
     </q-layout-header>
 
     <q-layout-drawer
+      class="container-drawer-main"
       v-model="leftDrawerOpen"
       :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
       side="left"
@@ -104,7 +105,7 @@
 <script>
 import { openURL } from 'quasar'
 import menuList from './MenuList'
-import  Firebase from '../../../plugins/firebase'
+import  Firebase from '../../../helpers/firebase'
 
 export default {
   name: 'LayoutDefault',
@@ -129,6 +130,9 @@ export default {
 </script>
 
 <style lang="scss">
+  .container-drawer-main aside{
+    background-color: #424242!important;
+  }
   .data-menu-top{
     padding-top: 0px;
     padding-bottom: 0px;
