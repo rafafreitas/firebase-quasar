@@ -1,4 +1,5 @@
 import Dashboard from '../layouts/Dashboard';
+import Profile from '../layouts/Profile';
 import Page403 from '../layouts/Forbidden';
 
 export default [
@@ -9,6 +10,15 @@ export default [
     meta: {
       auth: true,
       userType: 1
+    }
+  },
+  {
+    name: 'Profile',
+    path: 'Profile',
+    component: Profile,
+    meta: {
+      auth: true,
+      userType: null
     }
   },
   {
