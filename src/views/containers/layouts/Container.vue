@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header>
       <q-toolbar
-        color="dark"
+        class="div-toolbar"
         :inverted="$q.theme === 'ios'"
       >
         <q-btn
@@ -82,11 +82,11 @@
           <div class="header-data-actions row">
             <div class="col-5"></div>
             <div class="col-7 data-user-actions">
-              <q-btn style="background: #591575" icon="lock_outline" class="data-actions-btn" />
-              <q-btn style="background: #591575" icon="person_outline" class="data-actions-btn">
+              <q-btn icon="lock_outline" class="data-actions-btn" @click="lockPage()"/>
+              <q-btn icon="person_outline" class="data-actions-btn" @click="myProfile()">
                 <q-chip v-if="true" floating color="red">!</q-chip>
               </q-btn>
-              <q-btn style="background: #591575" icon="exit_to_app" class="data-actions-btn" @click="logout()"/>
+              <q-btn icon="exit_to_app" class="data-actions-btn" @click="logout()"/>
             </div>
 
           </div>
@@ -97,7 +97,9 @@
     </q-layout-drawer>
 
     <q-page-container>
-      <router-view />
+      <transition name="fade">
+        <router-view />
+      </transition>
     </q-page-container>
   </q-layout>
 </template>
@@ -116,8 +118,14 @@ export default {
   },
   methods: {
     openURL,
+    lockPage () {
+      this.$router.push('/login')
+    },
+    myProfile () {
+      this.$router.push('Profile')
+    },
     logout () {
-      console.log('Testeassa')
+      console.log('Realizando Logout')
       Firebase.auth().signOut().then(() =>{
         this.$router.push('/login')
       })
@@ -129,18 +137,22 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="stylus">
+  @import '~variables';
   .container-drawer-main aside{
-    background-color: #424242!important;
+    background-color: $lightPrimary!important;
+  }
+  .div-toolbar{
+    background-color: $primaryColor!important;
   }
   .data-menu-top{
     padding-top: 0px;
     padding-bottom: 0px;
 
     .data-menu-header{
-      background-color: #303030;
+      background-color: $darkPrimary;
       height: 150px;
-      color: #fff;
+      color: $white;
 
       .header-data-user{
         .data-user-img{
@@ -158,10 +170,25 @@ export default {
         .data-actions-btn{
           max-width: 40px;
           margin-right: 10px;
+          background: $accentColor;
         }
       }
     }
   }
+
+  .fade-enter-active, .fade-leave-active {
+    transition-property: opacity;
+    transition-duration: .25s;
+  }
+
+  .fade-enter-active {
+    transition-delay: .25s;
+  }
+
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
+
   /* Let's get this party started */
   .q-layout-drawer::-webkit-scrollbar {
     width: 5px;

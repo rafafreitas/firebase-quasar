@@ -12,8 +12,9 @@ export default {
   name: 'PageIndex'
 }
 </script>
-<style>
+<style lang="stylus">
+  @import '~variables';
   .back-color-default{
-    background-color: #443f3f;
+    background-color: $backPage;
   }
 </style>
