@@ -21,12 +21,18 @@
           </div>
         </div>
         <div class="card-actions inline-block vertical-middle">
-          <q-btn color="amber" @click="Login()" label="Login" />
+          <p></p>
+        </div>
+
+        <div class="card-actions inline-block vertical-middle">
+          <q-btn :loading="loadingBtn" color="amber" @click="Login()">
+            {{labelBtn}}
+          </q-btn>
         </div>
         <br>
         <br>
         <div class="card-actions inline-block vertical-middle">
-          <q-btn color="amber" @click="create()" label="Cadastrar" />
+          <!--<q-btn color="amber" @click="create()" label="Cadastrar" />-->
         </div>
 
       </div>
@@ -41,21 +47,18 @@
   import logoData from '../../../components/logoData'
   import { Platform } from 'quasar'
   export default {
+    data () {
+      return {
+        logo: 'Keytronic',
+        labelBtn: 'Login',
+        loadingBtn: false,
+        email: '',
+        password: '',
+        vivus: ''
+      }
+    },
     mounted () {
       this.startAnimation()
-      Firebase.auth().onAuthStateChanged(
-        (user) => {
-        if (user) {
-          console.log('User is online!')
-          if (!user.emailVerified){
-            console.log("E-mail not verified!")
-          }else{
-            this.$router.push('/home')
-          }
-        }else {
-          console.log('User is offline!')
-        }
-      });
     },
     computed: {
       heightSize (){
@@ -68,30 +71,18 @@
         return logoData[this.logo]
       }
     },
-    data () {
-      return {
-        logo: 'Keytronic',
-        email: '',
-        password: '',
-        vivus: ''
-      }
-    },
     methods: {
       Login () {
-        Firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-          (resp) => {
-            if (!resp.user.emailVerified){
-              console.log(resp)
-              console.log("E-mail not verified!")
-              this.$router.push('/home')
-            }else{
-              this.$router.push('/home')
-            }
-          },
-          (err) => {
-            console.log(err)
-          }
-        )
+        this.loadingBtn = true
+        this.$store.dispatch('getAuth',{email: this.email, password: this.password})
+          .then((retorno) =>{
+            console.log('Retorno', retorno)
+            this.loadingBtn = false
+          })
+          .catch((err) =>{
+            console.log('Erro', err)
+            this.loadingBtn = false
+          })
       },
       create () {
         Firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
@@ -141,7 +132,7 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 0.2;
+    opacity: 0.4;
   }
   div.background-login{
     z-index: 0;
