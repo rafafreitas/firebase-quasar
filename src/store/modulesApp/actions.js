@@ -1,9 +1,5 @@
-/*
-export const someAction = (state) => {
-}
-*/
-
-import Authentication from "./../../services/Authentication";
+import Authentication from "./../../services/Authentication"
+import ProcessingError from './../../services/ProcessingErros'
 
 export const getAuth = (state, user) => {
   return new Promise((resolve, reject) => {
@@ -13,11 +9,13 @@ export const getAuth = (state, user) => {
           resolve(result.user)
         },
         (error) => {
-          reject(error)
+          const messageError = new ProcessingError(error.code, error.message)
+          reject(messageError.getMessage())
         }
       ).catch(
         (err) =>{
-          reject(err)
+          const messageError = new ProcessingError(err.code, err.message)
+          reject(messageError.getMessage())
         })
   })
 
