@@ -6,6 +6,9 @@ export const getAuth = (state, user) => {
     Authentication.doAuthentication(user.email , user.password)
       .then(
         (result) => {
+          if (!result.user.emailVerified){
+            Authentication.sendVerificationEmail(result.user)
+          }
           resolve(result.user)
         },
         (error) => {
@@ -18,5 +21,19 @@ export const getAuth = (state, user) => {
           reject(messageError.getMessage())
         })
   })
+}
 
+export const getUserConnected = (state) => {
+  return new Promise((resolve, reject) => {
+    Authentication.checkUserFirebase()
+      .then(
+        (result) => {
+          resolve(result)
+        }
+      ).catch(
+      (err) =>{
+        const messageError = new ProcessingError(err.code, err.message)
+        reject(messageError.getMessage())
+      })
+  })
 }

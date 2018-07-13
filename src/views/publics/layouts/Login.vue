@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="background-div"></div>
-    <div class="background-login"></div>
+    <div class="background-login">
+      <video poster="../../../statics/video/inicial.png" id="bgvid" playsinline autoplay muted loop>
+        <source src="../../../statics/video/coral-video.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="flex justify-center" :class="heightSize">
       <div class="content-login text-white text-center width-3of4 bg-width-2of5 gt-bg-width-1of4 sm-auto " id="login">
         <div class="card-title">
@@ -46,6 +50,7 @@
   import Firebase from '../../../helpers/firebase'
   import logoData from '../../../components/logoData'
   import { Platform } from 'quasar'
+  import { Notify } from 'quasar'
   export default {
     data () {
       return {
@@ -59,6 +64,20 @@
     },
     mounted () {
       this.startAnimation()
+      this.$store.dispatch('getUserConnected')
+        .then((retorno) =>{
+          console.log('Retorno', retorno)
+          if (!retorno.emailVerified){
+            console.log("E-mail not verified!")
+            this.callMsg('info', 'Por favor, confirme seu e-mail!')
+          }else{
+            this.$router.push('/home')
+          }
+        })
+        .catch((err) =>{
+          console.log('Erro', err)
+
+        })
     },
     computed: {
       heightSize (){
@@ -77,10 +96,17 @@
         this.$store.dispatch('getAuth',{email: this.email, password: this.password})
           .then((retorno) =>{
             console.log('Retorno', retorno)
+            if (!retorno.emailVerified){
+              console.log("E-mail not verified!")
+              this.callMsg('info', 'Por favor, confirme seu e-mail!')
+            }else{
+              this.$router.push('/home')
+            }
             this.loadingBtn = false
           })
           .catch((err) =>{
             console.log('Erro', err)
+            this.callMsg('negative', err)
             this.loadingBtn = false
           })
       },
@@ -121,6 +147,28 @@
             }
           }
         )
+      },
+      callMsg(type, msg){
+        this.$q.notify({
+          message: msg,
+          timeout: 3000,
+          type: type,
+          icon: 'report_problem',
+          position: 'center',
+          //detail: 'Optional detail message.',
+          actions: [
+            {
+              label: 'Ok!',
+              icon: 'check',
+              noDismiss: false,
+              handler: () => {
+                console.log('Entendido!')
+              }
+            },
+          ],
+
+
+        })
       }
     }
   }
@@ -132,30 +180,38 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 0.4;
+    opacity: 0;
   }
   div.background-login{
     z-index: 0;
-    background-image: url("../../../statics/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    /*background-image: url("../../../statics/background.jpg");*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
   }
   div.content-login{
     z-index: 10;
     margin-top: 100px;
     margin-bottom: 0px;
+    /*
+    1a98bb4f
+    8b95ab5c
+    36827470
+    */
+    background-color: #1a98bb73;
+    border-radius: 25px;
+    padding: 20px 20px 0px 20px;
     div.card-content {
       min-height: 160px;
       .q-if:hover:before{
         color: #fff!important;
       }
       div.input-login {
-        color: #ffc107 !important;
+        color: #0de0a7  !important;
         .q-if-label{
           color: #ffffff;
         }
@@ -172,7 +228,7 @@
     }
     div.card-actions button{
       width: 300px;
-      background: #ffc107e3!important;
+      background: #0de0a7e3!important;
     }
   }
   h4 {
