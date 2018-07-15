@@ -47,7 +47,6 @@
 <script type="text/javascript">
   /* eslint-disable */
   import Vivus from 'vivus'
-  import Firebase from '../../../helpers/firebase'
   import logoData from '../../../components/logoData'
   import { Platform } from 'quasar'
   import { Notify } from 'quasar'
