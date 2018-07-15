@@ -59,7 +59,9 @@ module.exports = function (ctx) {
         'QItem',
         'QItemMain',
         'QItemSide',
-        'QPopover'
+        'QPopover',
+        'QBreadcrumbs',
+        'QBreadcrumbsEl'
       ],
       directives: [
         'Ripple',
