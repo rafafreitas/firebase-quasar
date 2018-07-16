@@ -7,6 +7,14 @@
           <q-breadcrumbs-el label="Perfil" to="/Profile" class="bread-active"/>
         </q-breadcrumbs>
       </div>
+      <div class="user-upload">
+        <q-uploader name="user-foto"
+                    url=""
+                    method="PUT"
+                    :url-factory="getSignedUrl"
+                    auto-expand="true"
+                    />
+      </div>
 
     </div>
 
@@ -20,10 +28,17 @@
 
 <script>
   export default {
-    name: 'Profile'
+    name: 'Profile',
+    methods:{
+      getSignedUrl(file){
+        console.log(file)
+      }
+    }
   }
 </script>
 <style lang="stylus">
   @import '~variables';
-
+  .user-upload {
+    margin-left 20px;
+  }
 </style>
